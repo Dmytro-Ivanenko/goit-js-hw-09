@@ -1,6 +1,11 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/dark.css';
 
+// .................variables
+let activeTimer = false;
+let intervalId = null;
+let endTime = 0;
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -21,10 +26,8 @@ const refs = {
   startBtn: document.querySelector('button'),
 };
 
-// Functions
-
+// ................Functions
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
@@ -50,13 +53,45 @@ function checkTime(selectedDates) {
   refs.startBtn.disabled = false;
 }
 
-function updateTime() {
-  // обновлять таймер
+function addLeadingZero(value) {
+  Object.keys(value).forEach(e => {
+    value[`${e}`] = value[`${e}`].toString().padStart(2, '0');
+  });
+
+  return value;
 }
 
-// Handlers
+function renderTimer(timeObj) {
+  const { days, hours, minutes, seconds } = refs;
+  const formattedTimer = addLeadingZero(timeObj);
+
+  days.innerText = formattedTimer.days;
+  hours.innerText = formattedTimer.hours;
+  minutes.innerText = formattedTimer.minutes;
+  seconds.innerText = formattedTimer.seconds;
+}
+
+function countTime() {
+  const currentTime = new Date().getTime();
+  const calcTime = endTime - currentTime;
+  renderTimer(convertMs(calcTime));
+}
+
+// ....................Handlers
 const onStart = e => {
-  setInterval(updateTime, 1000);
+  if (activeTimer === false) {
+    endTime = timePicker.selectedDates[0].getTime();
+
+    intervalId = setInterval(countTime, 1000);
+    activeTimer = true;
+    refs.startBtn.innerText = 'Stop';
+  } else {
+    clearInterval(intervalId);
+    activeTimer = false;
+    refs.startBtn.innerText = 'Start';
+  }
 };
 
 refs.startBtn.addEventListener('click', onStart);
+
+console.dir(refs.startBtn);
