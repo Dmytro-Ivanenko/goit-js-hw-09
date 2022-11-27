@@ -48,3 +48,121 @@ img {
   border-color: firebrick;
   font-weight: 800;
 }
+
+/* timer */
+
+body.timer-body {
+  background-color: #3f4458;
+  color: #fafafa;
+}
+.calendar-container {
+  display: flex;
+  align-items: center;
+}
+#datetime-picker {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  font-family: 'alarm clock', sans-serif;
+  font-size: 45px;
+}
+
+.timer-body a {
+  color: inherit;
+  font-family: 'Kemco Pixel', sans-serif;
+  font-size: 30px;
+}
+
+.value {
+  font-family: 'alarm clock', sans-serif;
+  font-size: 45px;
+}
+
+.label {
+  font-weight: 200;
+  font-family: 'Kemco Pixel', sans-serif;
+  font-size: 25px;
+
+  margin-left: 30px;
+}
+
+.start-btn {
+  display: inline-flex;
+  margin: 10px;
+  text-decoration: none;
+  position: relative;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 12px 30px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Roboto Condensed', Тahoma, sans-serif;
+  background: #337ab7;
+  border: 2px solid #bfe2ff;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+}
+.start-btn:disabled {
+  background: #c58a80;
+  cursor: auto;
+}
+.start-btn:hover,
+.start-btn:active {
+  color: #fff;
+}
+.start-btn:before,
+.start-btn:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 100%;
+  background-color: rgb(28, 75, 115, 0.2);
+  z-index: -1;
+}
+.start-btn:before {
+  left: -20px;
+  transform: translate(-50%, -50%);
+}
+.start-btn:after {
+  right: -20px;
+  transform: translate(50%, -50%);
+}
+.start-btn:hover:before,
+.start-btn:active:before {
+  animation: from-left 0.5s both;
+}
+.start-btn:hover:after,
+.start-btn:active:after {
+  animation: from-right 0.5s both;
+}
+@keyframes from-right {
+  0% {
+    right: -20px;
+  }
+  50% {
+    right: 50%;
+    width: 20px;
+  }
+  100% {
+    right: 50%;
+    width: 100%;
+  }
+}
+@keyframes from-left {
+  0% {
+    left: -20px;
+  }
+  50% {
+    left: 50%;
+    width: 20px;
+  }
+  100% {
+    left: 50%;
+    width: 100%;
+  }
+}

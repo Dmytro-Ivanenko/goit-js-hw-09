@@ -1,6 +1,9 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/dark.css';
 
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
+
 // .................variables
 let activeTimer = false;
 let intervalId = null;
@@ -44,7 +47,16 @@ function checkTime(selectedDates) {
   const today = new Date();
 
   if (selectedDates[0].getTime() < today.getTime()) {
-    alert('Please choose a date in the future');
+    Toastify({
+      text: 'Please choose a date in the future',
+      offset: {
+        x: 50,
+        y: 10,
+      },
+      style: {
+        background: 'rgba(182,14,74,0.6)',
+      },
+    }).showToast();
 
     refs.startBtn.disabled = true;
     return;
@@ -74,7 +86,12 @@ function renderTimer(timeObj) {
 function countTime() {
   const currentTime = new Date().getTime();
   const calcTime = endTime - currentTime;
-  renderTimer(convertMs(calcTime));
+  if (calcTime < 0) {
+    renderTimer(convertMs(0));
+    onStart();
+  } else {
+    renderTimer(convertMs(calcTime));
+  }
 }
 
 // ....................Handlers
