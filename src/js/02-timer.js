@@ -46,6 +46,10 @@ function convertMs(ms) {
 function checkTime(selectedDates) {
   const today = new Date();
 
+  if (activeTimer === true) {
+    onStart();
+  }
+
   if (selectedDates[0].getTime() < today.getTime()) {
     Toastify({
       text: 'Please choose a date in the future',
