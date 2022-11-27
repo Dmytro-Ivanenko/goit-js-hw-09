@@ -37,8 +37,14 @@ img {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-.btn-container .active-btn {
+.btn-container .active-start-btn {
   color: green;
   border-color: green;
+  font-weight: 800;
+}
+
+.btn-container .active-stop-btn {
+  color: firebrick;
+  border-color: firebrick;
   font-weight: 800;
 }

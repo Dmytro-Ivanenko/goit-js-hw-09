@@ -23,15 +23,17 @@ const onBtnClick = e => {
     return;
   } else if (
     e.target === refs.startBtn &&
-    !refs.startBtn.classList.contains('active-btn')
+    !refs.startBtn.classList.contains('active-start-btn')
   ) {
-    refs.startBtn.classList.add('active-btn');
+    refs.startBtn.classList.add('active-start-btn');
+    refs.stoptBtn.classList.remove('active-stop-btn');
     timeoutId = setInterval(changeBodyColor, 1000);
   } else if (
     e.target === refs.stoptBtn &&
-    refs.startBtn.classList.contains('active-btn')
+    refs.startBtn.classList.contains('active-start-btn')
   ) {
-    refs.startBtn.classList.remove('active-btn');
+    refs.startBtn.classList.remove('active-start-btn');
+    refs.stoptBtn.classList.add('active-stop-btn');
     clearTimeout(timeoutId);
   } else {
     return;
